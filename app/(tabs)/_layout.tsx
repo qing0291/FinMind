@@ -1,35 +1,64 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { AntDesign, Feather, FontAwesome6 } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+const DEFAULT_SIZE = 24;
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
+    // <Tabs tabBar={(props) => <TabBar {...props} inset={inset} />}>
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: "#000000",
+        tabBarStyle: { backgroundColor: "#E5E5E5" },
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="home" size={DEFAULT_SIZE} color={color} />
+          ),
         }}
       />
+
       <Tabs.Screen
-        name="explore"
+        name="analysis"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Analysis",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="bar-chart" size={DEFAULT_SIZE} color={color} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="incomeTax"
+        options={{
+          title: "Tax",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome6
+              name="file-invoice-dollar"
+              size={DEFAULT_SIZE}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Setting",
+          tabBarIcon: ({ color }) => (
+            <Feather name="settings" size={DEFAULT_SIZE} color={color} />
+          ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;
